@@ -9,8 +9,8 @@ def create_output_dirs(output_dir, classes):
     for label in classes:
         os.makedirs(os.path.join(output_dir, label), exist_ok=True)
 
-# Convert audio file to spectrogram, extract formants, and save
-def save_spectrogram_with_formants(audio_path, output_dir, label, file_name):
+# Convert audio file to spectrogram and save
+def save_spectrogram(audio_path, output_dir, label, file_name):
     y, sr = librosa.load(audio_path, sr=None)
     
     # Calculate short-time Fourier transform
@@ -20,27 +20,20 @@ def save_spectrogram_with_formants(audio_path, output_dir, label, file_name):
     # Create image
     plt.figure(figsize=(12, 8))
     
-    # Plot spectrogram
-    img = librosa.display.specshow(S_db, sr=sr, x_axis='time', y_axis='hz')
+    # Plot spectrogram with log frequency scale
+    img = librosa.display.specshow(S_db, sr=sr, x_axis='time', y_axis='log')
     plt.colorbar(img, format='%+2.0f dB')
-    plt.title('Spectrogram with Formants')
-    
-    # Extract and plot formants
-    n_formants = 3  # Extract first 3 formants
-    for t in range(0, S.shape[1], 10):  # Plot formants every 10 frames
-        spectrum = S_db[:, t]
-        formant_freqs, _ = find_peaks(spectrum, height=-20, distance=20)
-        formant_freqs = formant_freqs[:n_formants]  # Only take the first n_formants peaks
-        plt.scatter(t * len(y) / sr / S.shape[1] * np.ones_like(formant_freqs),
-                    formant_freqs * sr / S.shape[0],
-                    color='r', s=5)
+    plt.title('Spectrogram')
     
     plt.tight_layout()
     
     # Save image
     output_path = os.path.join(output_dir, label, f"{file_name}.png")
-    plt.savefig(output_path)
+    plt.savefig(output_path, dpi=100)  # Adjust DPI to get desired image size
     plt.close()
+
+    print(f"Saved spectrogram: {output_path}")
+    print("Please manually crop the image to 240x55 pixels, focusing on the vowel transition from /a/ to /o/.")
 
 # Main process
 def process_audio_files(audio_dir, output_dir, classes):
@@ -57,13 +50,13 @@ def process_audio_files(audio_dir, output_dir, classes):
             if file.lower().endswith(".wav"):  # Use lower() to ignore case
                 file_path = os.path.join(class_dir, file)
                 file_name, _ = os.path.splitext(file)
-                save_spectrogram_with_formants(file_path, output_dir, label, f"{file_name}_{i+1}")
+                save_spectrogram(file_path, output_dir, label, f"{file_name}_{i+1}")
             else:
                 print(f"Warning: File '{file}' is not in .wav format, skipped.")
 
 # Define audio file categories and paths
-audio_test_dir = r"C:\Users\huimin.chen\projects\chm-vowel\vowelRecognition\audio\test"
-output_test_dir = r"C:\Users\huimin.chen\projects\chm-vowel\vowelRecognition\test"
+audio_test_dir = r"C:\Users\huimin.chen\Downloads\thesis-code-20241023T072444Z-001\thesis-code\audio\test"
+output_test_dir = r"C:\Users\huimin.chen\Downloads\thesis-code-20241023T072444Z-001\thesis-code\audio\output\test"
 
 # Get category list
 classes = [d for d in os.listdir(audio_test_dir) if os.path.isdir(os.path.join(audio_test_dir, d))]

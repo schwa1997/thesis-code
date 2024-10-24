@@ -1,0 +1,6 @@
+Results for different batch sizes (Epoch = 80):
+
+Batch Size: 16
+Training Accuracy: 17.54%
+Validation Accuracy: 33.33%
+

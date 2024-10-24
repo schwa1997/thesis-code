@@ -1,0 +1,22 @@
+Total correct predictions: 3 / 22
+Overall accuracy: 13.64%
+
+Classification accuracy for each class:
+  Class 'A': 0 / 3 = 0.00%
+  Class 'E': 0 / 7 = 0.00%
+  Class 'I': 0 / 1 = 0.00%
+  Class 'O': 2 / 8 = 25.00%
+  Class 'U': 1 / 3 = 33.33%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           A       0.00      0.00      0.00         3
+           E       0.00      0.00      0.00         7
+           I       0.00      0.00      0.00         1
+           O       0.17      0.25      0.20         8
+           U       0.12      0.33      0.18         3
+
+    accuracy                           0.14        22
+   macro avg       0.06      0.12      0.08        22
+weighted avg       0.08      0.14      0.10        22

@@ -63,8 +63,8 @@ def process_audio_files(audio_dir, output_dir, classes):
                 print(f"Warning: File '{file}' is not in .wav format, skipped.")
 
 # Define audio file categories and paths
-audio_base_dir = r"C:\Users\huimin.chen\projects\chm-vowel\vowelRecognition\audio"
-output_base_dir = r"C:\Users\huimin.chen\projects\chm-vowel\vowelRecognition\output"
+audio_base_dir = r"C:\Users\huimin.chen\Downloads\thesis-code-20241023T072444Z-001\thesis-code\generator"
+output_base_dir = r"C:\Users\huimin.chen\Downloads\thesis-code-20241023T072444Z-001\thesis-code\generator\output"
 vowel_classes = ["A", "E", "I", "O", "U"]  # Vowel categories
 
 # Execute audio file conversion
