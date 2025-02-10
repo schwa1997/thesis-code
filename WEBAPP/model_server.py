@@ -67,7 +67,7 @@ def preprocess_image(image):
 
 # Load model
 try:
-    model = tf.keras.models.load_model('analysis/best_model.keras')
+    model = tf.keras.models.load_model('best_model.keras')
     print("Model loaded successfully!")
     
     # 打印模型结构以验证
