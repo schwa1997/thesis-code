@@ -13,42 +13,16 @@
             padding: 20px;
         }
 
-        .input-container {
-            margin-bottom: 20px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 150px;
-            margin-bottom: 10px;
-        }
-
-        #result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            min-height: 300px;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-        }
-
         #imagePreview {
             margin: 10px 0;
             min-height: 200px;
             display: flex;
             justify-content: center;
-            align-items: center;
         }
 
         #preview {
             max-width: 300px;
             max-height: 200px;
-            object-fit: contain;
-        }
-
-        .result-item {
-            margin: 10px 0;
-            padding: 5px;
         }
 
         .probability-bar {
@@ -66,8 +40,6 @@
             padding-right: 5px;
             color: white;
             line-height: 20px;
-            font-size: 12px;
-            transition: width 0.3s ease;
         }
 
         button {
@@ -77,37 +49,30 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
         }
 
         button:disabled {
             background-color: #cccccc;
-            cursor: not-allowed;
         }
     </style>
 </head>
 
 <body>
     <h1>Model Test Interface</h1>
-    <div class="input-container">
-        <h3>Upload Image for Testing:</h3>
+    <div>
+        <h3>Upload Image:</h3>
         <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
         <div id="imagePreview">
             <img id="preview" style="display: none;">
         </div>
-        <button onclick="runTest()" id="testButton">Run Test</button>
+        <button onclick="runTest()" id="testButton" disabled>Run Test</button>
     </div>
     <div>
-        <h3>Test Results:</h3>
+        <h3>Results:</h3>
         <div id="result"></div>
     </div>
 
     <script>
-        let lastResult = null;
         let isProcessing = false;
 
         function previewImage(event) {
@@ -122,9 +87,7 @@
             const resultDiv = document.getElementById('result');
             if (!result) return;
 
-            const correctnessColor = result.isCorrect ? 'green' : 'red';
-            let probabilitiesHtml = '<h4>Prediction Probabilities for All Classes:</h4>';
-
+            let probabilitiesHtml = '<h4>Prediction Probabilities:</h4>';
             const sortedProbabilities = Object.entries(result.allProbabilities)
                 .sort(([, a], [, b]) => b - a);
 
@@ -138,20 +101,16 @@
                     </div>`;
             }
 
-            const resultHtml = `
-                <div class="result-item">
-                    <p><strong>Prediction:</strong> Class ${result.prediction} (Vowel: ${result.predictedVowel})</p>
-                    <p><strong>Actual Vowel:</strong> ${result.actualVowel}</p>
-                    <p style="color: ${correctnessColor}"><strong>Status:</strong> Prediction is ${result.isCorrect ? 'correct' : 'incorrect'}</p>
-                    <p><strong>Confidence:</strong> ${(result.confidence * 100).toFixed(2)}%</p>
+            resultDiv.innerHTML = `
+                <div>
+                    <p><strong>Prediction:</strong> ${result.predictedVowel}</p>
+                    <p><strong>Actual:</strong> ${result.actualVowel}</p>
+                    <p style="color: ${result.isCorrect ? 'green' : 'red'}">
+                        <strong>Status:</strong> ${result.isCorrect ? 'Correct' : 'Incorrect'}
+                    </p>
                 </div>
                 ${probabilitiesHtml}
             `;
-
-            // 使用 requestAnimationFrame 确保 DOM 更新
-            requestAnimationFrame(() => {
-                resultDiv.innerHTML = resultHtml;
-            });
         }
 
         async function runTest() {
@@ -161,81 +120,54 @@
             const resultDiv = document.getElementById('result');
             const testButton = document.getElementById('testButton');
 
-            if (!imageInput.files || !imageInput.files[0]) {
-                resultDiv.innerHTML = '<p style="color: red;">Please select an image first</p>';
+            if (!imageInput.files[0]) {
+                resultDiv.innerHTML = '<p style="color: red;">Please select an image</p>';
                 return;
             }
 
             try {
                 isProcessing = true;
                 testButton.disabled = true;
-                resultDiv.innerHTML = '<p>Processing... Please wait...</p>';
-                const file = imageInput.files[0];
+                resultDiv.innerHTML = '<p>Processing...</p>';
 
-                if (file.size > 5 * 1024 * 1024) {
-                    throw new Error('File is too large. Please select an image under 5MB.');
-                }
+                const reader = new FileReader();
+                reader.readAsDataURL(imageInput.files[0]);
 
-                const base64Image = await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => resolve(e.target.result);
-                    reader.onerror = (e) => reject(new Error('File reading failed'));
-                    reader.readAsDataURL(file);
-                });
+                reader.onload = async () => {
+                    try {
+                        const response = await fetch('http://localhost:5000/api/test-model', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                input: reader.result,
+                                fileName: imageInput.files[0].name
+                            })
+                        });
 
-                console.log('Sending request to server...');
-                const response = await fetch('http://localhost:5000/api/test-model', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        input: base64Image,
-                        fileName: file.name
-                    })
-                });
+                        if (!response.ok) throw new Error('Network response was not ok');
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                console.log('Response received from server');
-                const result = await response.json();
-
-                if (result.success) {
-                    lastResult = result;
-                    await displayResult(result);
-                } else {
-                    throw new Error(result.error || 'Unknown error occurred');
-                }
-
+                        const result = await response.json();
+                        if (result.success) {
+                            await displayResult(result);
+                        } else {
+                            throw new Error(result.error || 'Unknown error');
+                        }
+                    } catch (error) {
+                        resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                    } finally {
+                        isProcessing = false;
+                        testButton.disabled = false;
+                    }
+                };
             } catch (error) {
-                console.error('Error:', error);
                 resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-            } finally {
                 isProcessing = false;
                 testButton.disabled = false;
             }
         }
 
-        // 添加页面卸载前的确认
-        window.onbeforeunload = function () {
-            if (lastResult) {
-                return "Are you sure you want to leave? Your test results will be lost.";
-            }
-        };
-
-        // 防止意外刷新
-        document.addEventListener('keydown', function (e) {
-            if ((e.key === 'r' || e.key === 'R') && (e.ctrlKey || e.metaKey)) {
-                if (lastResult) {
-                    e.preventDefault();
-                    if (confirm("Are you sure you want to refresh? Your test results will be lost.")) {
-                        window.location.reload();
-                    }
-                }
-            }
-        });
+        // Prevent page refresh
+        // window.onbeforeunload = () => isProcessing ? true : null;
     </script>
 </body>
 

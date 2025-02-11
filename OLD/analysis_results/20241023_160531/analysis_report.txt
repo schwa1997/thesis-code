@@ -1,8 +1,0 @@
-Validation accuracy: 0.36
-Validation loss: 2.13
-
-Training History:
-Final training accuracy: 0.18
-Final training loss: 5.46
-Final validation accuracy: 0.36
-Final validation loss: 3.77
