@@ -1,0 +1,50 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+% Load Thesis Class
+\documentclass{DEIThesis}
+
+\title{A Preliminary Study on Vowel Recognition using Convolutional Neural Networks for Individuals with Speech Disorders in the Italian Language}
+
+\author{Huimin Chen}
+\studentId{2071518}
+
+% Advisor
+\advisor{Prof. CANAZZA TARGON, SERGIO}
+
+% % If you are co-advised
+% \coadvisor{Dott. Robert Kahn}
+% \coadvisorsUniversity{University of Princeton}
+
+\university{University of Padova}
+\mastername{Computer Engineering}
+\academicYear{2024/2025}
+
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+    \Title{A Preliminary Study on Vowel Recognition using Convolutional Neural Networks for Individuals with Speech Disorders in the Italian Language}
+    \Author{Luca Martinelli}
+    \Language{en-EN}
+    \Keywords{Computer Engineering\sep LaTeX}
+\end{filecontents*}
+
+% Document
+
+\begin{document}
+    % The front matter (Cover, ToC, Abstract, etc...)
+    \frontmatter
+
+    % The main content
+    \mainmatter
+    
+    \include{chapters/01_introduction}
+    \include{chapters/02_related}
+    \include{chapters/03_background}
+    \include{chapters/04_cnn}
+    \include{chapters/05_model}
+    \include{chapters/06_results}
+    \include{chapters/07_webapp}
+    \include{chapters/99_conclusions}
+    
+    % Bibliography, appendix, acknowledges, etc...
+    \backmatter
+\end{document}

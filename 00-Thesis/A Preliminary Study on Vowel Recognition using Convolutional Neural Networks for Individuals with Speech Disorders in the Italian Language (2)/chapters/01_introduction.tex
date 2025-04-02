@@ -1,0 +1,158 @@
+%!TEX root = ../main.tex
+
+\chapter{Introduction}
+\label{chp:intro}
+
+\paragraph{}
+This thesis investigates the application of Convolutional Neural Networks (CNNs) in vowel recognition for Italian speech therapy, with a particular focus on supporting individuals with speech disorders. The research addresses the critical need for accessible and effective speech therapy tools, especially for children with hearing impairments. Through the development and implementation of an AI-based vowel recognition system, this work aims to enhance traditional speech therapy methods with modern technological solutions. The introduction chapter presents the research background, examines the challenges faced by deaf children, explores current speech training and rehabilitation approaches, and discusses the integration of artificial intelligence in speech therapy. This foundation sets the context for the technical developments and experimental results presented in subsequent chapters.
+
+
+\section{Research Background}
+\label{sec:background}
+
+Speech disorders are a significant global health concern affecting millions of people worldwide. According to the World Health Organization, approximately 5\% of children have speech development disorders \cite{who2021}, with this percentage increasing in developing countries. These disorders can significantly impact a child's educational, social, and emotional development, creating barriers to effective communication and social integration.
+
+Recent advances in digital technology and artificial intelligence have opened new possibilities for addressing speech disorders \cite{speech_therapy2023}. These technological innovations offer potential solutions to traditional therapy limitations, particularly in accessibility and consistency of treatment. Neural network-based approaches, in particular, have shown promising results in speech recognition and analysis tasks \cite{neural_speech2022}, suggesting their potential application in speech therapy.
+
+Among various speech disorders, those related to hearing impairment present unique challenges. Congenital hearing impairment, affecting approximately 1-3 in 1000 newborns \cite{hearing2022}, is one of the primary causes of delayed speech development. These children face substantial difficulties in developing language skills naturally because they cannot receive adequate auditory feedback, which is crucial for speech development.
+
+The impact of speech disorders extends far beyond mere communication difficulties. Research has demonstrated that children with speech disorders often experience reduced academic performance due to difficulties in classroom participation and comprehension. These challenges frequently lead to social isolation as children struggle to form relationships with their peers. The resulting social barriers can significantly affect their self-esteem and confidence, potentially leading to increased risk of mental health issues. Furthermore, these early challenges can have long-lasting effects, potentially limiting career opportunities and social advancement in later life.
+
+
+
+\section{The Reality of Deaf Children}
+\label{sec:deaf_children}
+
+\begin{displayquote}
+    "The greatest disability in society is not the physical limitation of people with disabilities, but rather the constructed limitation of people's thoughts about those disabilities."
+    \\ -- Helen Keller
+\end{displayquote}
+
+
+Deaf children face unique and complex challenges in their developmental journey that extend far beyond the mere inability to hear. Current statistics reveal a concerning reality: approximately 90\% of deaf children are born to hearing parents \cite{deaf2023}, creating immediate and significant communication barriers within the family environment. This communication gap often leads to delayed language acquisition and emotional development, as parents struggle to establish effective early communication methods with their children \cite{family_support2022}.
+
+The educational landscape for deaf children presents additional challenges. Research indicates that deaf children in mainstream educational settings often experience significant academic difficulties, with many falling behind their hearing peers in various subjects \cite{deaf_education2023}. This academic gap is not due to any inherent cognitive differences but rather stems from communication barriers and inadequate educational support systems. More troubling is the fact that only 30\% of deaf children receive early intervention services, despite overwhelming evidence supporting the critical importance of early support for language development and cognitive growth.
+
+\paragraph{}
+Social integration represents another significant challenge for deaf children. Studies have shown that deaf children often experience social isolation and difficulties in peer relationships, which can have long-lasting effects on their emotional well-being and self-esteem \cite{social_integration2023}. The challenge of navigating between the deaf and hearing worlds can create a sense of cultural displacement, as children struggle to establish their identity and find their place in both communities.
+
+\paragraph{}
+Early intervention programs have emerged as a crucial factor in supporting deaf children's development. Research demonstrates that children who receive appropriate early intervention services show significantly better outcomes in language development, cognitive skills, and social adjustment \cite{early_intervention2022}. However, access to these services remains limited, with less than half of deaf children having regular access to speech therapy and other essential support services.
+
+\paragraph{}
+The role of technology in supporting deaf children's development has become increasingly significant. Modern assistive technologies and digital communication tools have opened new possibilities for learning and interaction \cite{technology_impact2023}. However, the digital divide and economic disparities mean that many children, particularly in underserved communities, lack access to these potentially transformative resources.
+
+\paragraph{}
+The family environment plays a crucial role in a deaf child's development. Parents of deaf children often face significant challenges in adapting their communication methods and learning new skills to support their child's development. Studies show that families who receive proper support and training in communication strategies are better equipped to foster their child's language development and emotional well-being \cite{family_support2022}. However, many families lack access to these support systems, creating additional barriers to their child's development.
+
+\paragraph{}
+The intersection of deafness with other aspects of identity and social circumstances adds another layer of complexity. Factors such as socioeconomic status, cultural background, and geographical location can significantly impact a deaf child's access to resources and opportunities for development. This intersectionality requires careful consideration in developing support systems and interventions that can effectively address the diverse needs of deaf children and their families.
+
+\section{Speech Training and Rehabilitation}
+\label{sec:speech_training}
+
+\paragraph{}
+Speech rehabilitation training plays a crucial role in the language development of children with hearing impairments. Research consistently shows that early intervention and systematic speech training can significantly improve children's language abilities \cite{early2021}. The critical period for language development occurs during the first few years of life, making early intervention essential.
+
+\paragraph{}
+Modern speech rehabilitation encompasses a diverse range of methodologies and approaches \cite{speech_methods2023}. Traditional face-to-face therapy sessions remain fundamental but are increasingly complemented by innovative digital solutions. These methods include articulation therapy, phonological process approaches, and motor-based interventions. Each approach is tailored to address specific aspects of speech development, from basic sound production to complex language patterns.
+
+\paragraph{}
+The integration of digital platforms has revolutionized speech therapy practices \cite{digital_therapy2022}. These technological advances have introduced several transformative capabilities to the field. Real-time feedback mechanisms now allow learners to visualize their speech patterns with unprecedented clarity. Gamified exercises have proven effective in maintaining engagement and motivation throughout the therapy process. Advanced progress tracking tools enable therapists to make data-driven adjustments to treatment plans. Remote therapy options have significantly increased accessibility for many patients. Furthermore, automated practice sessions effectively supplement traditional therapy approaches, providing consistent support between formal sessions.
+
+\paragraph{}
+Motivation has emerged as a critical factor in the success of speech rehabilitation programs, particularly for young learners. Recent studies have identified several key elements that significantly influence engagement and persistence in therapy \cite{motivation_speech2023}. Interactive and age-appropriate activities form the foundation of successful engagement strategies. Clear visualization of progress helps maintain motivation by making improvements tangible and measurable. Positive reinforcement systems have proven essential in encouraging continued effort. Strong social support networks provide emotional backing and encouragement. Achievement recognition mechanisms help celebrate progress and maintain long-term commitment to the rehabilitation process.
+
+\paragraph{}
+The emergence of telerehabilitation has significantly transformed speech therapy delivery \cite{telerehab2022}. This innovative approach has brought numerous benefits to the field, particularly in terms of accessibility for remote communities. Reduced travel time and costs have made therapy more feasible for many families. Flexible scheduling options have allowed more consistent participation in therapy sessions. However, this approach also presents unique challenges. Technology barriers can impede effective delivery of services, connectivity issues may disrupt sessions, and some therapeutic techniques require modification to suit the online environment.
+
+\paragraph{}
+Traditional speech therapy methods continue to play a vital role in rehabilitation. One-on-one sessions with speech therapists provide personalized attention and immediate feedback. Group therapy sessions offer opportunities for peer learning and social interaction. Home-based exercises reinforce learning and promote consistent practice. Visual feedback systems and parent-mediated interventions complement these traditional approaches, though each method brings its own advantages and limitations.
+
+\paragraph{}
+Contemporary rehabilitation programs increasingly adopt multimodal approaches \cite{multimodal2023}. Traditional articulation exercises form the foundation of these programs, supplemented by sophisticated visual feedback systems. Tactile cues and physical prompts help learners develop proper articulation patterns. Rhythm and music-based activities enhance engagement and facilitate natural speech patterns. Augmentative and alternative communication tools provide additional support when needed, creating a comprehensive therapeutic environment.
+
+\paragraph{}
+The Italian language presents unique challenges and opportunities in speech therapy. Its relatively regular vowel system makes it an ideal candidate for systematic speech training \cite{italian_phonetics2021}. The clear distinction between Italian vowels provides a structured framework for developing and evaluating speech recognition systems, while also offering clear targets for learners to achieve.
+
+\paragraph{}
+Current speech training approaches face significant challenges in practice. The availability of qualified therapists is often limited, particularly in rural or underserved areas. The high cost of regular therapy sessions creates financial barriers for many families. Geographic distance to therapy centers can make regular attendance difficult or impossible for some families. Additionally, maintaining consistent child engagement between sessions proves challenging, and the practice between sessions often lacks the consistency needed for optimal progress.
+
+\paragraph{}
+The future of speech rehabilitation lies in the integration of traditional therapeutic approaches with emerging technologies. This combination promises to address many current limitations while maintaining the essential human element of therapy. Success in this field requires careful consideration of individual needs, technological capabilities, and evidence-based practices to ensure optimal outcomes for each learner.
+
+\section{AI Integration in Speech Training}
+\label{sec:ai_integration}
+
+\paragraph{}
+Artificial Intelligence offers promising solutions to enhance traditional speech therapy methods. Through personalized learning approaches, AI systems can adapt difficulty levels to individual needs, track progress comprehensively, and provide customized feedback that evolves with the child's development. This personalization ensures that each child receives training tailored to their specific needs and learning pace.
+
+\paragraph{}
+The continuous availability of AI-based systems represents a significant advantage. Unlike traditional therapy sessions, these tools can be accessed 24/7, providing consistent feedback and enabling remote learning capabilities. This accessibility helps maintain regular practice schedules and ensures that learning can continue beyond the confines of scheduled therapy sessions.
+
+\paragraph{}
+Enhanced engagement through AI systems comes through carefully designed interactive exercises and real-time visual feedback. By incorporating gamification elements, these systems can maintain children's interest and motivation, making the learning process more enjoyable and effective. The immediate feedback helps children understand their progress and encourages continued practice.
+
+\paragraph{}
+The integration of gamification elements in speech therapy applications has shown particular promise in maintaining children's engagement \cite{child_engagement2023}. These approaches transform traditional exercises into interactive experiences, making practice more enjoyable and sustainable. The combination of AI-driven feedback with game-like elements creates an environment where children are motivated to practice consistently, leading to better outcomes.
+
+\subsection{Focus on Vowel Training}
+\label{subsec:vowel_focus}
+
+\paragraph{}
+The effectiveness of AI-based speech therapy systems has been demonstrated in several studies \cite{ai_speech2022}. These systems have shown particular success in providing consistent, objective feedback that complements traditional therapy approaches. The ability to collect and analyze detailed data about a child's progress allows for more precise tracking of development and enables therapists to make more informed decisions about treatment strategies.
+
+\paragraph{}
+In speech training, vowel recognition and production serve as fundamental building blocks. Vowels represent the basic units of language and significantly impact overall speech intelligibility \cite{vowel2020}. They provide an essential foundation for developing more complex speech sounds, and their relatively consistent acoustic patterns make them ideal candidates for initial speech training efforts. The focus on vowel training allows for clear measurement of progress and provides immediate feedback that can motivate continued learning.
+
+\paragraph{}
+The primacy of vowels in speech development is well-established through extensive research \cite{speech_methods2023}. Vowels carry approximately more than half of the speech signal's energy and form the core of syllabic structure in most languages. Their proper articulation is crucial for word recognition and overall communication effectiveness. For children with hearing impairments, mastering vowel production becomes particularly critical as these sounds provide the foundation for developing proper prosody and intonation patterns.
+
+\paragraph{}
+From a developmental perspective, vowel training offers several strategic advantages. First, vowels are typically produced with relatively stable articulatory configurations, making them easier to teach and learn compared to consonants. Second, vowels are sustained sounds that can be held and modified, allowing learners to receive extended feedback and make real-time adjustments. Third, the acoustic properties of vowels are more distinct and consistent than those of consonants, facilitating both automated recognition and human perception \cite{multimodal2023}.
+
+\paragraph{}
+The choice to focus on vowel recognition in Italian is supported by both linguistic and practical considerations. Italian vowels are particularly well-suited for computer-based recognition due to their distinct acoustic properties \cite{italian_phonetics2021}. The Italian vowel system, with its seven phonemic vowels, provides a clear and systematic framework for training. Each vowel occupies a distinct position in the acoustic space, making it easier for learners to perceive and reproduce the differences between sounds. This characteristic makes them ideal candidates for developing and testing AI-based recognition systems, while also providing clear benchmarks for measuring improvement in speech production.
+
+\paragraph{}
+The systematic nature of vowel training also facilitates the development of structured learning programs. By focusing initially on vowels, therapists can establish clear progression paths, moving from simple sustained vowels to more complex combinations in different phonetic contexts. This structured approach allows for better monitoring of progress and more effective adaptation of training strategies. Furthermore, success in vowel production often leads to increased confidence and motivation, encouraging learners to tackle more challenging aspects of speech production \cite{motivation_speech2023}.
+
+\paragraph{}
+In the context of digital speech therapy, vowel training presents unique opportunities for technological innovation. The relatively simple acoustic patterns of vowels make them ideal for real-time analysis and feedback systems. Advanced visualization techniques can represent vowel production in ways that are both accurate and intuitive for learners. This combination of clear acoustic targets and immediate visual feedback creates an effective learning environment, particularly beneficial for children who rely heavily on visual cues due to hearing impairments \cite{digital_therapy2022}.
+
+\paragraph{}
+Moreover, the focus on vowel training aligns well with the needs of both learners and therapists. For learners, particularly children, the ability to produce clear, distinct vowels provides an immediate sense of achievement and progress. For therapists, the systematic nature of vowel training offers clear metrics for assessment and progress tracking. This alignment of pedagogical needs with technological capabilities makes vowel training an ideal starting point for implementing AI-assisted speech therapy solutions.
+
+\section{Thesis Structure}
+\label{sec:structure}
+
+\paragraph{}
+This thesis is organized into eight chapters that systematically present our research on vowel recognition using CNNs:
+
+\paragraph{}
+Chapter 1 (Introduction) presents the research background, examining the challenges faced by deaf children and exploring current speech training approaches. It introduces the motivation for developing AI-based solutions for speech therapy and establishes the context for our work.
+
+\paragraph{}
+Chapter 2 (State of the Art) provides a comprehensive review of current speech recognition technology, with particular focus on vowel recognition systems and their applications in the Italian language. It traces the evolution from traditional methods to modern deep learning approaches.
+
+\paragraph{}
+Chapter 3 (SoundRise: the Background Idea) introduces the SoundRise application, detailing its historical development and evolution. This chapter explains the fundamental concept and overall functionality of the application, particularly focusing on its role in speech therapy.
+
+\paragraph{}
+Chapter 4 (CNN in Classification) presents a detailed examination of Convolutional Neural Networks and their application in image classification tasks. It covers the theoretical foundations and architectural components that make CNNs particularly suitable for spectrogram-based vowel recognition.
+
+\paragraph{}
+Chapter 5 (CNN Vowel Recognition Model) describes our implementation of the CNN model for vowel recognition. It details the audio data preparation pipeline, spectrogram generation process, and the specific CNN architecture developed for this application.
+
+\paragraph{}
+Chapter 6 (Experimental Results and Analysis) presents comprehensive experimental results, including model performance across different configurations, classification accuracy for each vowel, and detailed analysis of the system's effectiveness.
+
+\paragraph{}
+Chapter 7 (Web Application Implementation) details the technical implementation of the SoundRise web application, including system architecture, frontend and backend components, deployment process, and user interface design. It also provides complete instructions for setting up and testing the application.
+
+\paragraph{}
+Chapter 8 (Conclusions and Future Works) summarizes the key achievements of this research, discusses its implications for speech therapy applications, and outlines potential directions for future work, including data collection strategies and technical enhancements.
+
+\paragraph{}
+The thesis concludes with a comprehensive bibliography and any necessary appendices containing additional technical details and supplementary materials.
+
