@@ -13,7 +13,8 @@ from PIL import Image
 import time
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+# CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
 
 def create_data_generator():
     test_datagen = ImageDataGenerator(
@@ -32,16 +33,13 @@ def create_data_generator():
     return test_generator
 
 def validate_model_thoroughly(model, test_generator, class_names):
-    print("\n=== 全面模型验证 ===")
-    
-    # 1. 确保测试集包含所有类别的样本
+
     results_by_class = {cls: {'correct': 0, 'total': 0, 'confidences': []} 
                        for cls in class_names}
     
     all_predictions = []
     all_true_labels = []
-    
-    print("\n测试每个类别的样本...")
+
     for i in range(len(test_generator)):
         images, labels = test_generator[i]
         predictions = model.predict(images, verbose=0)
@@ -60,8 +58,7 @@ def validate_model_thoroughly(model, test_generator, class_names):
             all_predictions.append(pred_class)
             all_true_labels.append(true_class)
     
-    # 打印详细结果
-    print("\n=== 每个类别的详细性能 ===")
+
     for cls in class_names:
         results = results_by_class[cls]
         accuracy = results['correct'] / results['total'] * 100
